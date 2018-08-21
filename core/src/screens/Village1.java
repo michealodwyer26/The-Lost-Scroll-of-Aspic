@@ -34,6 +34,7 @@ public class Village1 implements Screen {
 	private Viewport gamePort;
 	private Player player;
 	public Door door1;
+	public Door door2;
 	
 	private ShapeRenderer shapeRenderer;
 	
@@ -73,11 +74,12 @@ public class Village1 implements Screen {
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, gamecam);
 		player = new Player(game, playerX, playerY, playerDirection);
 		door1 = new Door(game, 160f, 96f, "brown");
+		door2 = new Door(game, 304f, 48f, "brown");
 		
 		mapRenderer = new TiledMapRendererWithSprites(map);
 		mapRenderer.addSprite(player);
 		mapRenderer.addSprite(door1);
-		
+		mapRenderer.addSprite(door2);
 		
 		mapObjectsRects = new ArrayList<Rectangle>();
 		specialMapObjectsRects = new ArrayList<Rectangle>();
@@ -216,6 +218,7 @@ public class Village1 implements Screen {
 		
 		player.update(delta, mapObjectsRects);
 		door1.update(delta);
+		door2.update(delta);
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
