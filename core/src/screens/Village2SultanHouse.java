@@ -123,7 +123,7 @@ public class Village2SultanHouse implements Screen{
 		allDialogueText[0] = "What's this? A Popescan has navigated all the way to my\ndynasty! Be gone!";
 		
 		allDialogueText[1] = "What's this? A Popescan has navigated all the way to my\ndynasty!";	
-		allDialogueText[2] = "You are far from a Popescan. No Popescan can stray\nfrom the Legend Of The Golden Arches.";
+		allDialogueText[2] = "You are far from a Popescan. No Popescan can stray\nfrom their Scroll of Aspic.";
 		allDialogueText[3] = "Without exhibiting symptoms of accute ignorance\nthat is.";
 		allDialogueText[4] = "So, after all these years, Popescu sends you looking\nfor help.";
 		allDialogueText[5] = "Take a sword, and be gone!";

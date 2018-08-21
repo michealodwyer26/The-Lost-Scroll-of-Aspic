@@ -123,7 +123,7 @@ public class Village1SultanHouse implements Screen{
 		allDialogueText = new String[20];
 		allDialogueText[0] = "You are The Chosen One, my child.";
 		allDialogueText[1] = "You must go now. Go to Vladi.";
-		allDialogueText[2] = "My tribe is in sufferance for they do not have the blessed\nguidance of The Legend of The Golden Arches.";
+		allDialogueText[2] = "My tribe is in sufferance for they do not have the blessed\nguidance of The Scroll of Aspic.";
 		allDialogueText[3] = "Vladi will help you. Go in stoic courage.";
 		allDialogueText[4] = "Be done with tomorrow, for the time...";
 		allDialogueText[5] = "Is now...";
@@ -131,7 +131,7 @@ public class Village1SultanHouse implements Screen{
 		allDialogueText[6] = "Carpe diem, sieze the day!";
 		
 		allDialogueText[7] = "Go to the dungeon.";
-		allDialogueText[8] = "Someone has stolen our Legend of The Golden Arches.";
+		allDialogueText[8] = "Someone has stolen our Scroll of Aspic.";
 		allDialogueText[9] = "You must retrieve it.";
 		allDialogueText[10] = "Go, in bravery.";
 		
