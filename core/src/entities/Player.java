@@ -190,39 +190,44 @@ public class Player extends Sprite {
 		
 		float increment = Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) ? fastIncrement : slowIncrement;
 		
+		
 		if(isWalkingToDestination) {
 			
 			if(game.getScreen() instanceof Village1) {
 				if(destination.equals("House 1") || destination.equals("House 2") || destination.equals("Sultan")) {
 					currentState = State.NORTH;
+					increment = dt * 16;
 				}
 				else {
 					currentState = State.SOUTH;
+					increment = dt * 32;
 				}
 			}
 			else if(game.getScreen() instanceof Village1House1 || game.getScreen() instanceof Village1House2 || game.getScreen() instanceof Village1SultanHouse) {
 				currentState = State.SOUTH;
+				increment = dt * 32;
 			}
 			
 			else if(game.getScreen() instanceof Overworld) {
 				currentState = State.NORTH;
+				increment = dt * 32;
 			}
 			
 			else if(game.getScreen() instanceof Village2) {
 				if(destination.equals("House 1") || destination.equals("House 2") || destination.equals("House 4") || destination.equals("Sultan")) {
 					currentState = State.NORTH;
+					increment = dt * 16;
 				}
 				else {
 					currentState = State.SOUTH;
+					increment = dt * 32;
 				}
 			}
 			
 			else if(game.getScreen() instanceof Village2House1 || game.getScreen() instanceof Village2House2 || game.getScreen() instanceof Village2House3 ||game.getScreen() instanceof Village2SultanHouse) {
 				currentState = State.SOUTH;
+				increment = dt * 32;
 			}
-			
-			
-			increment = dt * 32;
 		}
 		
 		// End block
