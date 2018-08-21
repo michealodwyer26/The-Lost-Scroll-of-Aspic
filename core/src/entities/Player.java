@@ -441,10 +441,14 @@ public class Player extends Sprite {
 					
 					if(rect.y == 96.0f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 						setDestination("House 1");
+						Village1 screen = (Village1) game.getScreen();
+						screen.door1.open();
 					}
 					
 					if(rect.y == 48.0f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 						setDestination("House 2");
+						Village1 screen = (Village1) game.getScreen();
+						screen.door1.open();
 					}
 					
 					if(rect.y == -16.0f && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {

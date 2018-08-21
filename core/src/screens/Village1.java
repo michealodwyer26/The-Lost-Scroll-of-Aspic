@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import entities.Door;
 import entities.Player;
 import lost.scroll.of.aspic.RpgGame;
 import tools.TiledMapRendererWithSprites;
@@ -32,6 +33,7 @@ public class Village1 implements Screen {
 	private TiledMapRendererWithSprites mapRenderer;
 	private Viewport gamePort;
 	private Player player;
+	public Door door1;
 	
 	private ShapeRenderer shapeRenderer;
 	
@@ -70,9 +72,12 @@ public class Village1 implements Screen {
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, gamecam);
 		player = new Player(game, playerX, playerY, playerDirection);
+		door1 = new Door(game, 160f, 96f, "brown");
 		
 		mapRenderer = new TiledMapRendererWithSprites(map);
 		mapRenderer.addSprite(player);
+		mapRenderer.addSprite(door1);
+		
 		
 		mapObjectsRects = new ArrayList<Rectangle>();
 		specialMapObjectsRects = new ArrayList<Rectangle>();
@@ -116,7 +121,6 @@ public class Village1 implements Screen {
 		game.font15.setColor(Color.BLACK);
 		
 		transitionCircleRadius = 150f;
-		
 	}
 	
 	@Override
@@ -211,6 +215,7 @@ public class Village1 implements Screen {
 		handleInput();
 		
 		player.update(delta, mapObjectsRects);
+		door1.update(delta);
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
