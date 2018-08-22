@@ -123,6 +123,12 @@ public class Village1 implements Screen {
 		game.font15.setColor(Color.BLACK);
 		
 		transitionCircleRadius = 150f;
+		
+		if(playerX == 160f) {
+			door1.close();
+		} else if(playerX == 304f) {
+			door2.close();
+		}
 	}
 	
 	@Override
@@ -219,6 +225,7 @@ public class Village1 implements Screen {
 		player.update(delta, mapObjectsRects);
 		door1.update(delta);
 		door2.update(delta);
+		System.out.println("x: " + player.getX());
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);

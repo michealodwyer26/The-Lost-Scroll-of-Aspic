@@ -104,6 +104,5 @@ public class Door extends Sprite {
 		isClosing = true;
 		isOpening = false;
 		openingAnimation.setPlayMode(Animation.PlayMode.REVERSED);
-		System.out.println("door closing");
 	}
 }
