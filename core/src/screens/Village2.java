@@ -135,6 +135,14 @@ public class Village2 implements Screen {
 		game.font15.setColor(Color.BLACK);
 		
 		transitionCircleRadius = 150f;
+		
+		if(startX == 80f) {
+			door1.close();
+		} else if(startX == 112f) {
+			door2.close();
+		} else if(startX == 448f) {
+			door3.close();
+		}
 	}
 	
 	public void handleInput() {
@@ -142,6 +150,10 @@ public class Village2 implements Screen {
 			displayMenu = displayMenu ? false : true;			
 			game.font10.setColor(Color.BLACK);
 			arrowPositionInMenu = 56;
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+			door1.close();
 		}
 		
 		if(!displayMenu && !player.isWalkingToDestination) {

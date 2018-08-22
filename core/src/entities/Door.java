@@ -26,6 +26,7 @@ public class Door extends Sprite {
 	
 	private float animationTimer;
 	private boolean isOpening;
+	private boolean isClosing;
 	
 	public Door(RpgGame game, float x, float y, String color) {
 		super(spriteSheet);
@@ -74,13 +75,13 @@ public class Door extends Sprite {
 		region = getFrame(dt);
 		setRegion(region);
 		
-		if(isOpening) {
+		if(isOpening || isClosing) {
 			animationTimer += dt;
 		}
 	}
 	
 	public TextureRegion getFrame(float dt) {
-		if(isOpening) {
+		if(isOpening || isClosing && animationTimer >= 0f) {
 			region = (TextureRegion) openingAnimation.getKeyFrame(animationTimer, false);
 		}
 		else {
@@ -92,5 +93,17 @@ public class Door extends Sprite {
 	public void open() {
 		animationTimer = 0f;
 		isOpening = true;
+		isClosing = false;
+		openingAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+	}
+	
+	public void close() {
+		// This is a hacky way of setting a delay which is needed, because
+		// the animation wouldn't be seen under the screen transition animtion.
+		animationTimer = -0.6f; 
+		isClosing = true;
+		isOpening = false;
+		openingAnimation.setPlayMode(Animation.PlayMode.REVERSED);
+		System.out.println("door closing");
 	}
 }
