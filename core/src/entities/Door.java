@@ -43,8 +43,14 @@ public class Door extends Sprite {
 		closed = new TextureRegion(getTexture(), 55, 7, 16, 32);
 		TextureRegion turning = new TextureRegion(getTexture(), 55, 39, 16, 32);
 		TextureRegion opened = new TextureRegion(getTexture(), 55, 71, 16, 32);
-		TextureRegion notVisible = new TextureRegion(getTexture(), 55, 101, 16, 32);
 		
+		if(color.equals("red")) {
+			closed = new TextureRegion(getTexture(), 183, 7, 16, 32);
+			turning = new TextureRegion(getTexture(), 183, 39, 16, 32);
+			opened = new TextureRegion(getTexture(), 183, 71, 16, 32);
+		}
+		
+		TextureRegion notVisible = new TextureRegion(getTexture(), 55, 101, 16, 32);
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		frames.add(closed);
