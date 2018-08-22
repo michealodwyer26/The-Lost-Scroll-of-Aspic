@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import entities.Door;
 import entities.Player;
 import lost.scroll.of.aspic.RpgGame;
 import tools.TiledMapRendererWithSprites;
@@ -33,6 +34,12 @@ public class Village2 implements Screen {
 	private Viewport gamePort;
 	private Player player;
 	private ShapeRenderer shapeRenderer;
+	
+	public Door door1;
+	public Door door2;
+	public Door door3;
+	
+
 	
 	private Texture documentText;
 	private Texture menuDocument1;
@@ -70,8 +77,19 @@ public class Village2 implements Screen {
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, gamecam);
 		player = new Player(game, startX, startY, direction);
 		
+		// door1 = x: 80, y: 112 (brown)
+		// door2 = x: 112, y: 512 (red) 
+		// door3 = x: 448, y: 144 (red)
+		
+		door1 = new Door(game, 80, 128, "brown");
+		door2 = new Door(game, 112, 528, "red");
+		door3 = new Door(game, 448, 160, "red");
+		
 		mapRenderer = new TiledMapRendererWithSprites(map);
 		mapRenderer.addSprite(player);
+		mapRenderer.addSprite(door1);
+		mapRenderer.addSprite(door2);
+		mapRenderer.addSprite(door3);
 		// ADD MORE NPCS HERE IF NEEDED
 		
 		mapObjectsRects = new ArrayList<Rectangle>();
@@ -212,6 +230,9 @@ public class Village2 implements Screen {
 		handleInput();
 		
 		player.update(delta, mapObjectsRects);
+		door1.update(delta);
+		door2.update(delta);
+		door3.update(delta);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

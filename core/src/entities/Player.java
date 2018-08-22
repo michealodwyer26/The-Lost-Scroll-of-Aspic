@@ -566,10 +566,14 @@ public class Player extends Sprite {
 					
 					if(rect.x == 80f && rect.y == 128f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 						setDestination("House 1");
+						Village2 screen = (Village2) game.getScreen();
+						screen.door1.open();
 					}
 					
 					if(rect.x == 112f && rect.y == 528f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 						setDestination("House 2");
+						Village2 screen = (Village2) game.getScreen();
+						screen.door2.open();
 					}
 					
 					if(rect.x == 336f && rect.y == 528f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
@@ -579,6 +583,8 @@ public class Player extends Sprite {
 					
 					if(rect.x == 448f && rect.y == 160f && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 						setDestination("House 4");
+						Village2 screen = (Village2) game.getScreen();
+						screen.door3.open();
 					}
 					
 					if(rect.x == 224f && rect.y == 656f && Gdx.input.isKeyPressed(Input.Keys.UP)) {
