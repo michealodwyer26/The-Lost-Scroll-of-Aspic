@@ -1,6 +1,7 @@
 package screens;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -53,7 +54,7 @@ public class Overworld implements Screen {
 	private String[] menuOptions, menuText;
 	
 	private float transitionCircleRadius;
-	
+		
 	public Overworld(RpgGame game, float playerX, float playerY) {
 		this.game = game;
 
@@ -375,6 +376,10 @@ public class Overworld implements Screen {
 		arrow.dispose();
 		dialogueBox.dispose();
 		
+	}
+	
+	public void enterFight() {
+		game.setScreen(new FightScreen(game, player.rect.x, player.rect.y));
 	}
 
 }

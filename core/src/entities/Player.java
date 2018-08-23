@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
+import lost.scroll.of.aspic.RpgGame;
 import screens.Overworld;
 import screens.Village1;
 import screens.Village1House1;
@@ -22,7 +24,6 @@ import screens.Village2House1;
 import screens.Village2House2;
 import screens.Village2House3;
 import screens.Village2SultanHouse;
-import lost.scroll.of.aspic.RpgGame;
 
 public class Player extends Sprite {
 	public enum State { EAST, WEST, NORTH, SOUTH, 
@@ -47,6 +48,8 @@ public class Player extends Sprite {
 	
 	private float slowFrameDuration, fastFrameDuration;
 	private int tilesPerSecond;
+	
+	private Random rand;
 	
 	public Player(RpgGame game, float startX, float startY, String direction) {
 		super(spriteSheet);
@@ -109,6 +112,8 @@ public class Player extends Sprite {
 		prevPosY = startY;
 		
 		isWalkingToDestination = false;
+		
+		rand = new Random();
 	}
 	
 	public void update(float dt, ArrayList<Rectangle> mapObjects) {
@@ -116,7 +121,7 @@ public class Player extends Sprite {
 		setRegion(region);
 		
 		// Handle all the walking variables and the walking system
-	
+		int randomInt = -1;
 		boolean isWalking = (walkingSouth || walkingNorth || walkingEast || walkingWest) ? true : false;
 
 		if(isWalking) {
@@ -132,6 +137,7 @@ public class Player extends Sprite {
 				if(walkAnotherTile) {
 					walkingNorth = true;
 					stateTimer = 0;
+					randomInt = rand.nextInt(11);
 				}
 			}
 			// South
@@ -146,6 +152,7 @@ public class Player extends Sprite {
 				if(walkAnotherTile) {
 					walkingSouth = true;
 					stateTimer = 0;
+					randomInt = rand.nextInt(11);
 				}
 			}
 			// East
@@ -160,6 +167,7 @@ public class Player extends Sprite {
 				if(walkAnotherTile) {
 					walkingEast = true;
 					stateTimer = 0;
+					randomInt = rand.nextInt(11);
 				}
 			}
 			// West
@@ -174,8 +182,14 @@ public class Player extends Sprite {
 				if(walkAnotherTile) {
 					walkingWest = true;
 					stateTimer = 0;
+					randomInt = rand.nextInt(11);
 				}
 			}
+		}
+		
+		if(randomInt == 1) {
+			Overworld screen = (Overworld) game.getScreen();
+			screen.enterFight();
 		}
 		
 		rect.x = getX();
