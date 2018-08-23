@@ -39,8 +39,6 @@ public class Village2 implements Screen {
 	public Door door2;
 	public Door door3;
 	
-
-	
 	private Texture documentText;
 	private Texture menuDocument1;
 	private Texture menuDocument2;
@@ -253,12 +251,15 @@ public class Village2 implements Screen {
 			player.checkCollisions(mapObjectsRects, specialMapObjectsRects, null);
 		}
 		
-		else {			
+		else {
 			if(player.getWalkingToDestinationTimer() > RpgGame.SCREEN_TRANSITION) {	
 				if(player.destination.equals("Overworld")) {
 					game.setScreen(new Overworld(game, 592f, 640f));
 				}
 				
+				else if(player.destination.equals("Sultan")) {
+					game.setScreen(new Village2SultanHouse(game));
+				}
 			}
 			else if(player.getWalkingToDestinationTimer() > RpgGame.FAST_SCREEN_TRANSITION) {
 				if(player.destination.equals("House 1")) {
@@ -271,10 +272,6 @@ public class Village2 implements Screen {
 				
 				else if(player.destination.equals("House 4")) {
 					game.setScreen(new Village2House3(game));
-				}
-				
-				else if(player.destination.equals("Sultan")) {
-					game.setScreen(new Village2SultanHouse(game));
 				}
 			}
 		}
@@ -377,6 +374,19 @@ public class Village2 implements Screen {
 			transitionCircleRadius -= RpgGame.TRANSITION_RADIUS_FAST_INCREMENT;
 			
 			shapeRenderer.end();
+		}
+		if(player.isWalkingToDestination) {
+			if(player.destination.equals("Sultan")) {
+				shapeRenderer.begin(ShapeType.Filled);
+				shapeRenderer.setProjectionMatrix(gamecam.combined);
+				
+				shapeRenderer.setColor(0, 0, 0, 0);
+				shapeRenderer.circle(player.getX() + 8, player.getY() + 8, transitionCircleRadius);
+				
+				transitionCircleRadius += RpgGame.TRANSITION_RADIUS_INCREMENT;
+				
+				shapeRenderer.end();
+			}
 		}
 	}
 	
