@@ -225,7 +225,6 @@ public class Village1 implements Screen {
 		player.update(delta, mapObjectsRects);
 		door1.update(delta);
 		door2.update(delta);
-		System.out.println("x: " + player.getX());
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -240,13 +239,13 @@ public class Village1 implements Screen {
 				if(player.destination.equals("Overworld")) {
 					game.setScreen(new Overworld(game, 39 * RpgGame.TILE_SIZE, 4 * RpgGame.TILE_SIZE));
 				}
+				else if(player.destination.equals("Sultan")) {
+					game.setScreen(new Village1SultanHouse(game));
+				}
 			}
 		
 			else if(player.getWalkingToDestinationTimer() > RpgGame.FAST_SCREEN_TRANSITION) {
-				if(player.destination.equals("Sultan")) {
-					game.setScreen(new Village1SultanHouse(game));
-				}
-				else if(player.destination.equals("House 1")) {
+				if(player.destination.equals("House 1")) {
 					game.setScreen(new Village1House1(game));
 				}
 				else if(player.destination.equals("House 2")) {
@@ -356,6 +355,20 @@ public class Village1 implements Screen {
 			transitionCircleRadius -= RpgGame.TRANSITION_RADIUS_FAST_INCREMENT;
 			
 			shapeRenderer.end();
+		}
+		
+		if(player.isWalkingToDestination) {
+			if(player.destination.equals("Sultan")) {
+				shapeRenderer.begin(ShapeType.Filled);
+				shapeRenderer.setProjectionMatrix(gamecam.combined);
+				
+				shapeRenderer.setColor(0, 0, 0, 0);
+				shapeRenderer.circle(player.getX() + 8, player.getY() + 8, transitionCircleRadius);
+				
+				transitionCircleRadius += RpgGame.TRANSITION_RADIUS_INCREMENT;
+				
+				shapeRenderer.end();
+			}
 		}
 	}
 	
