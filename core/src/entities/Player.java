@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import lost.scroll.of.aspic.RpgGame;
+import screens.FightScreen;
 import screens.Overworld;
 import screens.Village1;
 import screens.Village1House1;
@@ -127,10 +128,13 @@ public class Player extends Sprite {
 		if(isWalking) {
 			// North
 			if(getY() > prevPosY + RpgGame.TILE_SIZE) {
+				
 				setPosition(prevPosX, prevPosY + RpgGame.TILE_SIZE);
 				
 				walkingNorth = false;
 				prevPosY += RpgGame.TILE_SIZE;
+				
+				randomInt = rand.nextInt(11);
 				
 				boolean walkAnotherTile = Gdx.input.isKeyPressed(Input.Keys.UP);
 				
@@ -147,6 +151,8 @@ public class Player extends Sprite {
 				walkingSouth = false;
 				prevPosY -= RpgGame.TILE_SIZE;
 				
+				randomInt = rand.nextInt(11);
+				
 				boolean walkAnotherTile = Gdx.input.isKeyPressed(Input.Keys.DOWN);
 				
 				if(walkAnotherTile) {
@@ -161,6 +167,8 @@ public class Player extends Sprite {
 				
 				walkingEast = false;
 				prevPosX += RpgGame.TILE_SIZE;
+				
+				randomInt = rand.nextInt(11);
 				
 				boolean walkAnotherTile = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 				
@@ -177,6 +185,8 @@ public class Player extends Sprite {
 				walkingWest = false;
 				prevPosX -= RpgGame.TILE_SIZE;
 				
+				randomInt = rand.nextInt(11);
+				
 				boolean walkAnotherTile = Gdx.input.isKeyPressed(Input.Keys.LEFT);
 				
 				if(walkAnotherTile) {
@@ -187,13 +197,12 @@ public class Player extends Sprite {
 			}
 		}
 		
-		if(randomInt == 1) {
-			Overworld screen = (Overworld) game.getScreen();
-			screen.enterFight();
-		}
-		
 		rect.x = getX();
 		rect.y = getY();
+		
+		if(randomInt == 1) {
+			game.setScreen(new FightScreen(game, rect.x, rect.y));
+		}
 	}
 	
 	private TextureRegion getFrame(float dt) {
@@ -243,9 +252,6 @@ public class Player extends Sprite {
 				increment = dt * 32;
 			}
 		}
-		
-		// End block
-		
 		
 		switch(currentState) {
 		
