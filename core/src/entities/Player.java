@@ -200,9 +200,63 @@ public class Player extends Sprite {
 		rect.x = getX();
 		rect.y = getY();
 		
-		if(randomInt == 1) {
+		System.out.println(isOnPath());
+		
+		if(randomInt == 1 && !isOnPath()) {
 			game.setScreen(new FightScreen(game, rect.x, rect.y));
 		}
+	}
+	
+	private boolean isOnPath() {
+		int x = (int) getX();
+		int y = (int) getY();
+		
+		System.out.println("x: " + x);
+		System.out.println("y: " + y);
+		
+		if(x >= 576 && x <= 640) {
+			if(y == 64) {
+				return true;
+			}
+		}
+		if(x == 576) {
+			if(y >= 64 && y <= 256) {
+				return true;
+			}
+		}
+		if(x >= 576 && x <= 736) {
+			if(y == 256) {
+				return true;
+			}
+		}
+		if(x == 736) {
+			if(y >= 256 && y <= 368) {
+				return true;
+			}
+		}
+		if(x >= 192 && x <= 736) {
+			if(y == 368) {
+				return true;
+			}
+		}
+		if(x == 192) {
+			if(y >= 368 && y <= 608) {
+				return true;
+			}
+		}
+		if(x >= 192 && x <= 592) {
+			if(y == 608) {
+				return true;
+			}
+		}
+		if(x == 592) {
+			if(y >= 608 && y <= 640) {
+				return true;
+			}
+		}
+		
+		return false;
+		
 	}
 	
 	private TextureRegion getFrame(float dt) {
