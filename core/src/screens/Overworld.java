@@ -137,10 +137,6 @@ public class Overworld implements Screen {
 			arrowPositionInMenu = 56;
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-			game.setScreen(new FightScreen(game, player.rect.x, player.rect.y));
-		}
-		
 		if(!displayMenu && !player.isWalkingToDestination) {
 			boolean isWalking = (player.walkingSouth || player.walkingNorth || player.walkingEast || player.walkingWest) ? true : false;
 			
