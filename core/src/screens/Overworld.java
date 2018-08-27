@@ -29,7 +29,7 @@ public class Overworld implements Screen {
 	
 	private RpgGame game;
 	private TiledMap map;
-	private OrthographicCamera gamecam;
+	private OrthographicCamera gamecam, uiCam;
 	private TiledMapRendererWithSprites mapRenderer;
 	private Viewport gamePort;
 	private Player player;
@@ -54,6 +54,8 @@ public class Overworld implements Screen {
 	private String[] menuOptions, menuText;
 	
 	private float transitionCircleRadius;
+	private float x1, y1, width1, height1;
+	private float x2, y2, width2, height2;
 	
 	private boolean isEnteringFight;
 		
@@ -64,6 +66,9 @@ public class Overworld implements Screen {
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, gamecam);
 		player = new Player(game, playerX, playerY, "south");
+		
+		uiCam = new OrthographicCamera();
+		uiCam.setToOrtho(false, RpgGame.V_WIDTH, RpgGame.V_HEIGHT);
 		
 		mapRenderer = new TiledMapRendererWithSprites(map);
 		mapRenderer.addSprite(player);
@@ -111,6 +116,17 @@ public class Overworld implements Screen {
 		game.font15.setColor(Color.BLACK);
 		
 		transitionCircleRadius = 150f;
+		
+		x1 = - RpgGame.V_WIDTH / 2;
+		y1 = 0;
+		width1 = RpgGame.V_WIDTH / 2;
+		height1 = RpgGame.V_HEIGHT;
+		
+		x2 = RpgGame.V_WIDTH;
+		y2 = y1;
+		width2 = width1; 
+		height2 = height1;
+		
 		
 		isEnteringFight = false;
 	}
@@ -326,7 +342,7 @@ public class Overworld implements Screen {
 			game.batch.end();
 		}
 		
-		if(player.isWalkingToDestination || player.isEnteringFight) {
+		if(player.isWalkingToDestination) {
 			shapeRenderer.begin(ShapeType.Filled);
 			shapeRenderer.setProjectionMatrix(gamecam.combined);
 			
@@ -347,6 +363,22 @@ public class Overworld implements Screen {
 			
 			transitionCircleRadius -= RpgGame.TRANSITION_RADIUS_FAST_INCREMENT;
 			
+			shapeRenderer.end();
+		}
+		
+		if(player.isEnteringFight) {
+			shapeRenderer.begin(ShapeType.Filled);
+			shapeRenderer.setProjectionMatrix(uiCam.combined);
+			
+			shapeRenderer.setColor(0, 0, 0, 0);
+			
+			shapeRenderer.rect(x1, y1, width1, height1);
+			shapeRenderer.rect(x2, y2, width2, height2);
+			
+			width1 += delta * 150;
+			width2 += delta * 150;
+			x2 -= delta * 150;
+
 			shapeRenderer.end();
 		}
 	}
