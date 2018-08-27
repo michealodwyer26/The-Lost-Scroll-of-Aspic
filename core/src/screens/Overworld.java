@@ -209,7 +209,12 @@ public class Overworld implements Screen {
 	public void render(float delta) {
 		handleInput();
 		
-		player.update(delta, mapObjectsRects);
+		if(!player.isEnteringFight) {
+			player.update(delta, mapObjectsRects);
+		}
+		else {
+			player.incrementEnteringFightTimer(delta);
+		}
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -227,6 +232,10 @@ public class Overworld implements Screen {
 					game.setScreen(new Village2(game, 14f * RpgGame.TILE_SIZE, 0f, "north"));
 				}
 			}
+		}
+		
+		if(player.getEnteringFightTimer() > RpgGame.SCREEN_TRANSITION) {
+			game.setScreen(new FightScreen(game, player.rect.x, player.rect.y));
 		}
 		
 		gamecam.position.x = player.getX();

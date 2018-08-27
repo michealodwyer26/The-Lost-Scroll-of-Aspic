@@ -204,13 +204,6 @@ public class Player extends Sprite {
 		if(randomInt == 1 && !isOnPath()) {
 			isEnteringFight = true;
 		}
-		
-		if(isEnteringFight) {
-			enteringFightTimer += dt;
-			if(enteringFightTimer > RpgGame.SCREEN_TRANSITION) {
-				game.setScreen(new FightScreen(game, rect.x, rect.y));
-			}
-		}
 	}
 	
 	private boolean isOnPath() {
@@ -747,5 +740,13 @@ public class Player extends Sprite {
 	public void setDestination(String destination) {
 		isWalkingToDestination = true;
 		this.destination = destination;
+	}
+	
+	public float getEnteringFightTimer() {
+		return enteringFightTimer;
+	}
+	
+	public void incrementEnteringFightTimer(float dt) {
+		enteringFightTimer += dt;
 	}
 }
