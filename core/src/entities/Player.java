@@ -34,7 +34,7 @@ public class Player extends Sprite {
 	private RpgGame game;
 	
 	private State currentState, previousState;
-	private float stateTimer, walkingToDestinationTimer;
+	private float stateTimer, walkingToDestinationTimer, enteringFightTimer;
 	
 	public static Texture spriteSheet = new Texture("data/sprites/player.png");
 	private TextureRegion region;
@@ -43,7 +43,7 @@ public class Player extends Sprite {
 	
 	private float prevPosX, prevPosY;
 	
-	public boolean walkingSouth, walkingNorth, walkingEast, walkingWest, isWalkingToDestination;
+	public boolean walkingSouth, walkingNorth, walkingEast, walkingWest, isWalkingToDestination, isEnteringFight;
 	public String destination;
 	public Rectangle rect;
 	
@@ -113,6 +113,7 @@ public class Player extends Sprite {
 		prevPosY = startY;
 		
 		isWalkingToDestination = false;
+		isEnteringFight = false;
 		
 		rand = new Random();
 	}
@@ -199,18 +200,23 @@ public class Player extends Sprite {
 		
 		rect.x = getX();
 		rect.y = getY();
-	
-		System.out.println(isOnPath());
 			
 		if(randomInt == 1 && !isOnPath()) {
-			game.setScreen(new FightScreen(game, rect.x, rect.y));
+			isEnteringFight = true;
+		}
+		
+		if(isEnteringFight) {
+			enteringFightTimer += dt;
+			if(enteringFightTimer > RpgGame.SCREEN_TRANSITION) {
+				game.setScreen(new FightScreen(game, rect.x, rect.y));
+			}
 		}
 	}
 	
 	private boolean isOnPath() {
 		int x = (int) getX();
 		int y = (int) getY();
-		System.out.println(x);
+		
 		if(x >= 576 && x <= 640 && y == 64) {
 			return true;
 		}

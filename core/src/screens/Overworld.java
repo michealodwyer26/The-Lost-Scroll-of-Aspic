@@ -54,6 +54,8 @@ public class Overworld implements Screen {
 	private String[] menuOptions, menuText;
 	
 	private float transitionCircleRadius;
+	
+	private boolean isEnteringFight;
 		
 	public Overworld(RpgGame game, float playerX, float playerY) {
 		this.game = game;
@@ -109,6 +111,8 @@ public class Overworld implements Screen {
 		game.font15.setColor(Color.BLACK);
 		
 		transitionCircleRadius = 150f;
+		
+		isEnteringFight = false;
 	}
 	
 	@Override
@@ -313,7 +317,7 @@ public class Overworld implements Screen {
 			game.batch.end();
 		}
 		
-		if(player.isWalkingToDestination) {
+		if(player.isWalkingToDestination || player.isEnteringFight) {
 			shapeRenderer.begin(ShapeType.Filled);
 			shapeRenderer.setProjectionMatrix(gamecam.combined);
 			
@@ -325,7 +329,7 @@ public class Overworld implements Screen {
 			shapeRenderer.end();
 		}
 		
-		if(transitionCircleRadius > 0 && !player.isWalkingToDestination) {
+		if(transitionCircleRadius > 0 && !player.isWalkingToDestination && !player.isEnteringFight) {
 			shapeRenderer.begin(ShapeType.Filled);
 			shapeRenderer.setProjectionMatrix(gamecam.combined);
 			
@@ -375,11 +379,5 @@ public class Overworld implements Screen {
 		menuDocument2.dispose();
 		arrow.dispose();
 		dialogueBox.dispose();
-		
 	}
-	
-	public void enterFight() {
-		game.setScreen(new FightScreen(game, player.rect.x, player.rect.y));
-	}
-
 }
