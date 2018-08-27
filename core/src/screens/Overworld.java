@@ -58,13 +58,13 @@ public class Overworld implements Screen {
 	
 	private boolean isEnteringFight;
 		
-	public Overworld(RpgGame game, float playerX, float playerY) {
+	public Overworld(RpgGame game, float playerX, float playerY, String playerDirection) {
 		this.game = game;
-
+				
 		map = new TmxMapLoader().load("data/maps/overworld.tmx");
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, gamecam);
-		player = new Player(game, playerX, playerY, "south");
+		player = new Player(game, playerX, playerY, playerDirection);
 		
 		uiCam = new OrthographicCamera();
 		uiCam.setToOrtho(false, RpgGame.V_WIDTH, RpgGame.V_HEIGHT);
@@ -237,7 +237,18 @@ public class Overworld implements Screen {
 		}
 		
 		if(player.getEnteringFightTimer() > RpgGame.SCREEN_TRANSITION) {
-			game.setScreen(new FightScreen(game, player.rect.x, player.rect.y));
+			if(player.walkingNorth) {
+				game.setScreen(new FightScreen(game, player.rect.x, player.rect.y, "north"));
+			}
+			else if(player.walkingEast) {
+				game.setScreen(new FightScreen(game, player.rect.x, player.rect.y, "east"));
+			}
+			else if(player.walkingSouth) {
+				game.setScreen(new FightScreen(game, player.rect.x, player.rect.y, "south"));
+			}
+			else if(player.walkingWest) {
+				game.setScreen(new FightScreen(game, player.rect.x, player.rect.y, "west"));
+			}
 		}
 		
 		gamecam.position.x = player.getX();

@@ -70,7 +70,7 @@ public class MainMenuScreen implements Screen {
 		if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
 			// Village of Vladi = 592, 624
 			// Village of Popescu = 640, 64
-			game.setScreen(new Overworld(game, 640, 64)); 
+			game.setScreen(new Overworld(game, 640, 64, "south")); 
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
 			Gdx.app.exit();

@@ -61,6 +61,10 @@ public class Player extends Sprite {
 			currentState = State.STANDING_NORTH;
 		} else if(direction.equals("south")) {
 			currentState = State.STANDING_SOUTH;
+		} else if(direction.equals("east")) {
+			currentState = State.STANDING_EAST;
+		} else {
+			currentState = State.STANDING_WEST;
 		}
 		
 		previousState = currentState;

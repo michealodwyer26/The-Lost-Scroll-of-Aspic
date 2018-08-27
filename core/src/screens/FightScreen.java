@@ -69,11 +69,14 @@ public class FightScreen implements Screen {
 	private boolean monsterWon;
 	private boolean playerRunning;
 	
-	public FightScreen(RpgGame game, float overworldX, float overworldY) {
+	private String originalPlayerDirection;
+	
+	public FightScreen(RpgGame game, float overworldX, float overworldY, String direction) {
 		this.game = game;
 		
 		this.overworldX = overworldX;
 		this.overworldY = overworldY;
+		originalPlayerDirection = direction;
 		
 		gamePort = new FitViewport(RpgGame.V_WIDTH, RpgGame.V_HEIGHT, new OrthographicCamera());
 		shapeRenderer = new ShapeRenderer();
@@ -280,7 +283,7 @@ public class FightScreen implements Screen {
 		if(playerRunning) {
 			playerX -= 2*playerVel;
 			if(playerX < 0) {
-				game.setScreen(new Overworld(game, overworldX, overworldY));
+				game.setScreen(new Overworld(game, overworldX, overworldY, originalPlayerDirection));
 			}
 		}
 		
@@ -303,7 +306,7 @@ public class FightScreen implements Screen {
 		}
 		
 		if(playerX > RpgGame.V_WIDTH) {
-			game.setScreen(new Overworld(game, overworldX, overworldY));
+			game.setScreen(new Overworld(game, overworldX, overworldY, originalPlayerDirection));
 		}
 		
 	}

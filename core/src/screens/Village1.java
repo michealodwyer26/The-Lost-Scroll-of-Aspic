@@ -225,7 +225,7 @@ public class Village1 implements Screen {
 		else {
 			if(player.getWalkingToDestinationTimer() > RpgGame.SCREEN_TRANSITION) {
 				if(player.destination.equals("Overworld")) {
-					game.setScreen(new Overworld(game, 39 * RpgGame.TILE_SIZE, 4 * RpgGame.TILE_SIZE));
+					game.setScreen(new Overworld(game, 39 * RpgGame.TILE_SIZE, 4 * RpgGame.TILE_SIZE, "south"));
 				}
 				else if(player.destination.equals("Sultan")) {
 					game.setScreen(new Village1SultanHouse(game));
