@@ -52,15 +52,12 @@ public class Village1 implements Screen {
 	private final float maxCamY = RpgGame.TILE_SIZE * 18.5f;
 	
 	private boolean debugLines;
-	private boolean displayTownDocument;
 	private boolean displayMenu;
 	private boolean displayDialogueBox;
 	
 	private int arrowPositionInMenu;
-	private float documentDisplayTime;
 	
 	private String dialogueText;
-	private String location;
 	private String[] menuOptions;
 	private String[] menuText;
 	
@@ -103,14 +100,9 @@ public class Village1 implements Screen {
 		arrow = new Texture(Gdx.files.internal("data/misc/fancyarrow.png"));
 		dialogueBox = new Texture(Gdx.files.internal("data/misc/dialoguebox.png"));
 		
-		documentDisplayTime = 0f;
-		
-		displayTownDocument = true;
 		debugLines = false;
 		displayMenu = false;
 		arrowPositionInMenu = 0;
-
-		location = "Village of Popescu";
 		
 		menuOptions = new String[2];
 		menuOptions[0] = "Inventory";
@@ -166,10 +158,6 @@ public class Village1 implements Screen {
 			
 			if(Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
 				debugLines = debugLines == true ? false : true;
-			}
-			
-			if(Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
-				displayTownDocument = displayTownDocument ? false : true;
 			}
 		}
 		
@@ -264,11 +252,6 @@ public class Village1 implements Screen {
 		
 		mapRenderer.setView(gamecam);
 		mapRenderer.render();		
-
-		if(displayDialogueBox) {
-			displayTownDocument = false;
-		}
-		
 		
 		if(debugLines) {
 			shapeRenderer.setProjectionMatrix(gamecam.combined);
@@ -288,24 +271,6 @@ public class Village1 implements Screen {
 			shapeRenderer.rect(player.rect.x, player.rect.y, player.rect.width, player.rect.height);
 			
 			shapeRenderer.end();
-		}
-		
-		if(displayTownDocument) {
-			game.batch.begin();
-			game.batch.draw(documentText, RpgGame.LOCATION_DOC_X, RpgGame.LOCATION_DOC_Y, documentText.getWidth() + 130, documentText.getHeight());
-			
-			game.font15.draw(game.batch, location, RpgGame.LOCATION_TEXT_X, RpgGame.LOCATION_TEXT_Y);
-			
-			game.batch.end();
-			
-			if(documentDisplayTime < RpgGame.LOCATION_DOC_TIME) {
-								
-				documentDisplayTime += delta;
-				
-				if(documentDisplayTime > RpgGame.LOCATION_DOC_TIME) {
-					displayTownDocument = false;
-				}
-			}
 		}
 		
 		if(displayMenu) {			
