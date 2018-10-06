@@ -83,8 +83,8 @@ public class RpgGame extends Game {
 	
 	public static final int DIALOGUE_TEXT_Y_UPPER = DIALOGUE_BOX_Y + (int)(DIALOGUE_BOX_HEIGHT*0.75); // used when there are two lines in the dialogue
 	
-	public static final int DIALOGUE_ARROW_X = V_WIDTH - 110;
-	public static final int DIALOGUE_ARROW_Y = DIALOGUE_BOX_Y;
+	public static final int DIALOGUE_ARROW_X = V_WIDTH - 85;
+	public static final int DIALOGUE_ARROW_Y = DIALOGUE_BOX_Y + 2;
 	public static final int DIALOGUE_ARROW_WIDTH = 75;
 	public static final int DIALOGUE_ARROW_HEIGHT = 15;
 	
